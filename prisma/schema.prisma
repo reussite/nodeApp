@@ -11,15 +11,24 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
   name     String
   password String?
-  role     Role    @default(USER)
+  role     Role      @default(USER)
+  articles Article[]
 }
 
 enum Role {
   ADMIN
   USER
   AUTHOR
+}
+
+model Article {
+  id      Int     @id @default(autoincrement())
+  title   String
+  contenu String?
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  Int?
 }
