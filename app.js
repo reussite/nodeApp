@@ -13,9 +13,12 @@ const prisma = new PrismaClient();
   .then(console.log); */
 
 prisma.user
-  .findMany({
+  .findUnique({
     where: {
-      id: prisma.user.id,
+      id: 2 ,
+    },
+    include: {
+      articles: true,
     },
   })
   .then(console.log);
